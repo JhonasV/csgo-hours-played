@@ -37,7 +37,7 @@ const getHoursStringify = async (steamId, username) => {
 
     let hours = data.split(' ')[0];
     let hoursFormmated = new Intl.NumberFormat().format(hours);
-    result.message = `El usuario ${username} tiene ${hoursFormmated} horas`;
+    result.message = `El usuario ${username} tiene ${hoursFormmated} horas en CSGO`;
     return result;
 }
 
