@@ -1,9 +1,8 @@
-var express = require('express');
 const steamService = require('../services/steam-service');
-var router = express.Router();
 
-/* GET home page. */
-router.get('/api/v1/csgo/hours/:username', async function(req, res, next) {
+const indexController = {};
+
+indexController.getHours = async (req, res, next) => {
 
   const username = req.params.username;
   const steamIdResult = await steamService.getSteamId(username);
@@ -14,6 +13,8 @@ router.get('/api/v1/csgo/hours/:username', async function(req, res, next) {
 
   const result = await steamService.getHoursStringify(steamIdResult.steamdId ,username);
   res.send(result.message); 
-});
+}
 
-module.exports = router;
+module.exports = indexController;
+
+
