@@ -7,11 +7,13 @@ var indexRouter = require('./api/index');
 
 var app = express();
 
-app.use(logger('dev'));
+const loggerMode = process.env.NODE_ENV !== undefined ? process.env.NODE_ENV : 'dev'; 
+
+app.use(logger(loggerMode));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 
