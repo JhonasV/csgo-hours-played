@@ -1,4 +1,5 @@
 const axios =  require("axios");
+const timeUnitFormatter = require('../utils/time-unit');
 
 const getSteamId = async (username) =>{
     let result = {success: false, message: '', steamdId: null}
@@ -30,14 +31,12 @@ const getHoursStringify = async (steamId, username) => {
     }
 
     let data = response.data;
-    if(data.includes('Cannot') || data.includes('An error') || data.includes('The player')){
+    if(data.split(' ').length > 2){
         result.message = data;
         return result;
     }
 
-    let hours = data.split(' ')[0];
-    let hoursFormmated = new Intl.NumberFormat().format(hours);
-    result.message = `El usuario ${username} tiene ${hoursFormmated} horas en CSGO`;
+    result.message = `El usuario ${username} tiene ${timeUnitFormatter(data)} en CSGO`;
     return result;
 }
 
